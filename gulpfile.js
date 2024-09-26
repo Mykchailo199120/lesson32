@@ -1,7 +1,6 @@
 const { src, dest, series, parallel, watch,} = require('gulp');
 const sass = require('gulp-sass')(require('sass'));
-const postcss = require('gulp-postcss');
-const autoprefixer = require('gulp-autoprefixer');
+
 const cleanCSS = require('gulp-clean-css');
 const csscomb = require('gulp-csscomb');
 const browserSync = require('browser-sync').create();
@@ -11,7 +10,6 @@ const browserSync = require('browser-sync').create();
 function compileSass() {
     return src('src/scss/**/*.scss')
         .pipe(sass().on('error', sass.logError))
-        .pipe(postcss([autoprefixer()]))
         .pipe(cleanCSS({ compatibility: 'ie8' }))
         .pipe(dest('dist/css'))
         .pipe(browserSync.stream());
